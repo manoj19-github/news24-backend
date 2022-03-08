@@ -1,0 +1,10 @@
+const multer=require("multer")
+const requireSignin=require("../app/http/middleware/requireSignin")
+const Router=require("express").Router()
+const postsController=require("../app/http/controllers/postController")
+const storage=multer.diskStorage({})
+const uploads=multer({storage})
+Router.get("/posts",postsController().getAllPost)
+Router.get("/posts/:postId",postsController().getSinglyPost)
+Router.post("/posts/create",requireSignin,uploads.single("image"),postsController().createPost)
+module.exports=Router
