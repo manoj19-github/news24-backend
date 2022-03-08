@@ -14,7 +14,12 @@ const authRoutes=require("./routes/authRoutes")
 const postsRoutes=require("./routes/postsRoutes")
 const categoryRoutes=require("./routes/categoryRoutes")
 const mypostsRoutes=require("./routes/mypostsRoutes")
-app.use(cors())
+app.use(
+  cors({
+    origin:process.env.CLIENT_SERVER_URL,
+    methods:"GET,POST,PUT,DELETE",
+    credentials:true
+  }))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(morgan("dev"))
